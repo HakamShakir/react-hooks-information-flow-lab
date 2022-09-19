@@ -1,19 +1,14 @@
-import Item from "./Item";
-
-function Filter({ onCategoryChange, items }) {
-  const itemsToDisplay = items.filter((item) => {
-    if (onCategoryChange === "All") return true;
-
-    return item.category === onCategoryChange;
-  });
-
+const Filter = ({ onCategoryChange }) => {
+  function handleCategoryChange(event) {
+    onCategoryChange(event.target.value);
+  }
   return (
-    <ul className="Items">
-      {itemsToDisplay.map((item) => (
-        <Item key={item.id} name={item.name} category={item.category} />
-      ))}
-    </ul>
+    <select name="filter" onChange={handleCategoryChange}>
+      <option value="All">Filter by category</option>
+      <option value="Produce">Produce</option>
+      <option value="Dairy">Dairy</option>
+      <option value="Dessert">Dessert</option>
+    </select>
   );
-}
-
+};
 export default Filter;
